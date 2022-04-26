@@ -2,7 +2,6 @@
   "name": "recipest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "@types/faker": "^5.5.9",
     "@types/jest": "^27.4.1",
+    "@types/lodash": "^4.14.182",
     "faker": "^5.5.3",
     "jest": "^27.0.0",
     "knex": "^1.0.6",
@@ -40,8 +40,10 @@
   },
   "dependencies": {
     "@swc/core": "^1.2.171",
+    "ajv": "^8.11.0",
     "dotenv": "^16.0.0",
     "fastify": "^3.28.0",
-    "fastify-plugin": "^3.0.1"
+    "fastify-plugin": "^3.0.1",
+    "lodash": "^4.17.21"
   }
 }

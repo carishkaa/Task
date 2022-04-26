@@ -6,7 +6,18 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 export const buildApp = (): { app: FastifyInstance } => {
-  const app = fastify()
+  const opts = {
+    ajv: {
+      customOptions: {
+        removeAdditional: true,
+        useDefaults: true,
+        nullable: true,
+      },
+      plugins: [],
+    },
+  }
+  
+  const app = fastify(opts)
   
   const dirname = path.dirname(fileURLToPath(import.meta.url))
   const root = path.join(dirname, '..')

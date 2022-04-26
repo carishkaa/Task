@@ -1,9 +1,16 @@
+import _ from 'lodash'
 import { FastifyPluginAsync } from 'fastify'
+import { recipeDtoOut } from './schemas'
 
 export const routes: FastifyPluginAsync = async (app) => {
-  app.get('/popular-recipes', async () => {
-    const popularRecipes = await app.db.raw(
-      `
+  app.get(
+    '/popular-recipes',
+    {
+      schema: { response: { 200: { type: 'array', items: recipeDtoOut } } },
+    },
+    async () => {
+      const res = await app.db.raw(
+        `
       -- show users' fish reviews count for each review
       WITH revrec AS 
       (
@@ -25,8 +32,13 @@ export const routes: FastifyPluginAsync = async (app) => {
       WHERE recipe_raiting.average_rating > 8.0
       ORDER BY COALESCE(rec.publish_time, rec.create_time) DESC
       LIMIT 20`
-    )
+      )
 
-    return popularRecipes.rows
-  })
+      // to camelCase
+      const popularRecipes = res.rows.map((ob: any) =>
+        _.mapKeys(ob, (v, k) => _.camelCase(k))
+      )
+      return popularRecipes
+    }
+  )
 }
