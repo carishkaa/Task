@@ -1,5 +1,5 @@
 import { knex } from 'knex'
-import { animal, internet, commerce, lorem, company, random, date, datatype, helpers } from 'faker'
+import { animal, internet, commerce, company, date, datatype, helpers } from 'faker'
 
 const times = <R>(n: number, fn: (i: number) => R) => Array(n).fill(0).map((_, i) => fn(i))
 const client = knex({ client: 'pg', connection: { host: 'localhost', user: 'recipest_docker', password: 'recipest_docker' } })
@@ -25,10 +25,10 @@ const client = knex({ client: 'pg', connection: { host: 'localhost', user: 'reci
                     create_time: date.past(1),
                 };
             }));
-            const recipes: { id: string }[] = await client('recieps').insert(recipeData, 'id')
+            const recipes: { id: string }[] = await client('recipes').insert(recipeData, 'id')
             const reviewData = users.flatMap(user => helpers.shuffle(recipes).slice(0, REVIEWS_PER_USER).map(recipe => ({
                 user_id: user.id,
-                reciep_id: recipe.id,
+                recipe_id: recipe.id,
                 rating_value: datatype.number(10)
             })));
             await client('reviews').insert(reviewData, 'id')
