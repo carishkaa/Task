@@ -4,18 +4,42 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "seed-data": "ts-node src/setup.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "seed-data": "ts-node src/seeds/setup.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": true
+      }
+    },
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": []
+  },
   "devDependencies": {
     "@types/faker": "^5.5.9",
+    "@types/jest": "^27.4.1",
     "faker": "^5.5.3",
+    "jest": "^27.0.0",
     "knex": "^1.0.6",
     "pg": "^8.7.3",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5",
+    "vite-plugin-node": "^0.0.19"
+  },
+  "dependencies": {
+    "@swc/core": "^1.2.171",
+    "dotenv": "^16.0.0",
+    "fastify": "^3.28.0",
+    "fastify-plugin": "^3.0.1"
   }
 }
