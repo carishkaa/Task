@@ -16,15 +16,18 @@ export const buildApp = (): { app: FastifyInstance } => {
       plugins: [],
     },
   }
-  
+
+  // create fastify instance
   const app = fastify(opts)
   
+  // path to .env file
   const dirname = path.dirname(fileURLToPath(import.meta.url))
   const root = path.join(dirname, '..')
   dotenv.config({
     path: path.join(root, '.env'),
   })  
 
+  // register db and route
   app.register(dbPlugin)
   app.register(routes, { prefix: '/api' })
   

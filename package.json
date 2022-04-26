@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "jest": {
     "globals": {
